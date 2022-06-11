@@ -1,0 +1,17 @@
+{% extends "base.html" %} {% block title %} Delete Post {% endblock %} 
+{%block body_block %}
+{% if user.is_authenticated %} {% if user.is_doctor %}
+
+{% ifequal user.pk post.user.pk %}
+<h1>DELETE Post:{{post.title}}</h1>
+
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %} <strong>Are you sure!?</strong><br>
+  <button class="btn btn-secondary">Delete</button>
+</form>
+{% endifequal %}
+{% endif %}
+{% else %}
+You are not allowed here
+{% endif %}
+{% endblock %}

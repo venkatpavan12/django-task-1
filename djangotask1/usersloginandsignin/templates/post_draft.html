@@ -1,0 +1,21 @@
+{% extends "base.html" %} {% block title %} Draft{% endblock %} {% block body_block %}
+{% if user.is_authenticated %} {% if user.is_doctor %}
+
+<h1>Draft</h1>
+<ul>
+  {% for post in object_list %}
+  {% if post.draft %}
+
+  <li>
+    <a href="{% url 'post-edit' post.pk%}">
+      {{post.title}}</a
+    >
+  </li>
+  {% endif %}
+  {% endfor %}
+</ul>
+
+{% else %}
+You are not allowed here
+{% endif %}{% endif %}
+{% endblock %}

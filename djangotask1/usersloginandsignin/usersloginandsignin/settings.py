@@ -43,7 +43,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'basic_app',
-    'widget_tweaks'
+    'blog',
+    'bootstrap3',
+    'widget_tweaks',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -141,6 +144,8 @@ MEDIA_ROOT=MEDIA_DIR
 MEDIA_URL = '/media/'
 
 LOGIN_URL= '/basicapp/user_login'
+LOGIN_REDIRECT_URL= 'home'
+LOGOUT_REDIRECT_URL= 'index'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

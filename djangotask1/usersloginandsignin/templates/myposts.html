@@ -1,0 +1,26 @@
+{% extends "base.html" %}{% block title %} My Posts {% endblock %}  {% block body_block %}
+ {% if user.is_authenticated %}
+<h1>My posts</h1>
+<ul>
+  {% for post in object_list %}
+
+    <div class="card">
+  <div class="card-body">
+    <h3 class="card-title"><a href="{% url 'post-detail' post.pk %}">
+      {{post.title}}</a
+    ></h3>
+    <h4 class="card-subtitle mb-2 text-muted">- {{post.user.last_name}} {% if user.is_doctor %}{% ifequal user.pk post.user.pk %}<small><a href="{% url 'post-delete' post.pk%}">
+      delete</a
+    ></small>{% endifequal %}{% endif %} </h4> <br />
+      {% if post.draft %} <h3>Draft</h3>{% endif %}
+    {% if post.image %}
+        <img src="{{post.image.url}}" alt="post-imgae" height="100" width="100">
+    {% endif %}
+      {{post.summary|truncatewords_html:15}}
+      </div>
+      </div>
+      <br>
+  {% endfor %}
+</ul>
+{% endif %}
+{% endblock %}

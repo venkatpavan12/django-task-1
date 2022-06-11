@@ -1,0 +1,21 @@
+{% extends "base.html" %} {% block title %} {{post.title}} {% endblock %}
+{%block body_block %}
+<div class="jumbotron">
+    <img src="{{post.image.url}}" alt="post-image" class="float-right m-5" width="100" height="100">
+  <h1 class="display-4">{{post.title}}</h1>
+  
+  <h4 class="card-subtitle mb-2 text-muted">-by {{post.user.last_name}}
+    {% if user.is_authenticated %} {% if user.is_doctor %}{%ifequal user.pk post.user.pk %}
+<small><a href="{% url 'post-delete' post.pk%}">  delete</a
+    ></small>{% endifequal %}{% endif %}
+  </h4>
+
+Category: {{post.category}}<br />
+</h4>
+<p>Summary : {{post.summary}}</p>
+<hr class="my-4">
+{% autoescape off %}
+    <p class="lead">Content : {{post.content_html}}</p>
+{% endautoescape %}
+<br />
+ {% endif %}{% endblock %}

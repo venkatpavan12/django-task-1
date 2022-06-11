@@ -1,0 +1,28 @@
+{% extends "base.html" %} {% block title %} {{cats}} {% endblock %} 
+{%block body_block %}
+{% if user.is_authenticated %}
+{% if category_posts %}
+<h1>{{cats}}</h1>
+<ul>
+{% for post in category_posts%}
+{% if not post.draft %}
+  <li>
+    <a href="{% url 'post-detail' post.pk %}">
+      {{post.title}}</a
+    >- {{post.user.last_name}} {% if user.is_doctor %}<small><a href="{% url 'post-delete' post.pk%}">
+      delete</a
+    ></small>{% endif %}  <br />
+    {% if post.image %}
+        <img src="{{post.image.url}}" alt="post-imgae" height="100" width="100"><br>
+    {% endif %}
+      {{post.summary|truncatewords_html:15}}
+  </li>
+  {% endif %} 
+
+{% endfor %}
+</ul>
+{% else %}
+<h2>sorry this page does not exist</h2>
+{% endif %}
+{% endif %}
+{% endblock %}
