@@ -19,7 +19,9 @@ from . import settings
 from django.contrib.staticfiles.urls import static
 
 urlpatterns = [
+    path('apts/',include('appointment.urls'),name='apts'),
     path('blog/',include('blog.urls'),name='blog'),
     path('',include('basic_app.urls')),
     path('admin/', admin.site.urls),
+    path('accounts/', include('allauth.urls')),
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,0 +1,15 @@
+{% extends "base.html" %} {% block title %} New Appointment {% endblock %} 
+{%block body_block %}
+{% if user.is_authenticated %} {% if user.is_patient %}
+<h1>New Appointment</h1>
+{% load crispy_forms_tags %} 
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %} {{form|crispy}}
+  <br>
+  <button class="btn btn-success">confirm</button>
+</form>
+
+{% else %}
+You are not allowed here
+{% endif %}{% endif %}
+{% endblock %}

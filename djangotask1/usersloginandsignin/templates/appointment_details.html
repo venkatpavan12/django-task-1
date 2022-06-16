@@ -1,0 +1,12 @@
+{% extends "base.html" %}{% block title %} Appointment Details {% endblock %} {% block body_block %}
+{% if user.is_authenticated %}
+{% if user.is_patient %}
+
+<h1>Appointment Details</h1>
+<p class="well">Doctor Name: {{apt.doctor.user.first_name}} {{apt.doctor.user.last_name}}</p>
+<p class="well">Appointment Date:{{apt.date}}</p>
+<p class="well">Appointment Start Time: {{apt.starttime}}</p>
+<p class="well">Appointment End Time: {{apt.etime}}</p>
+{% endif %}
+{% endif %}
+{% endblock %}

@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path,include
 from django.contrib import admin
 from .import views
 
@@ -9,4 +9,5 @@ urlpatterns=[
     path('doctor_register/',views.doctor_register.as_view(),name='doctor_register'),
     path('login/',views.login_request, name='login'),
     path('logout/',views.logout_view, name='logout'),
+    path('accounts/', include('allauth.urls')),
 ]

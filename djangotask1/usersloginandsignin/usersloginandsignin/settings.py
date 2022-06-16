@@ -47,8 +47,33 @@ INSTALLED_APPS = [
     'bootstrap3',
     'widget_tweaks',
     'crispy_forms',
+    'appointment',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
 ]
-
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend'
+]
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': [
+            'profile',
+            'openid',
+            'email',
+            'https://www.googleapis.com/auth/calendar',
+            'https://www.googleapis.com/auth/calendar.events',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'offline',
+        }
+    }
+}
+SITE_ID = 5
+SOCIALACCOUNT_STORE_TOKENS=True
+ACCOUNT_SIGNUP_FORM_CLASS = 'basic_app.forms.SignupForm'
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -144,8 +169,9 @@ MEDIA_ROOT=MEDIA_DIR
 MEDIA_URL = '/media/'
 
 LOGIN_URL= '/basicapp/user_login'
-LOGIN_REDIRECT_URL= 'home'
+LOGIN_REDIRECT_URL= 'index'
 LOGOUT_REDIRECT_URL= 'index'
+ACCOUNT_LOGOUT_REDIRECT_URL='index'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

@@ -1,0 +1,34 @@
+{% extends "base.html" %}{% block title %} My Appointments {% endblock %} {% block body_block %}
+{% if user.is_authenticated %}
+{% if user.is_patient %}
+<h1>My Appointments</h1>
+<ul>
+
+    <div class="accordion" id="accordionPanelsStayOpenExample">
+        {% for apt in object_list %}
+
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
+                    aria-controls="panelsStayOpen-collapseOne">
+                    {{apt.doctor.user.first_name}} {{apt.doctor.user.last_name}} - {{apt.starttime}}
+                </button>
+            </h2>
+            <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show"
+                aria-labelledby="panelsStayOpen-headingOne">
+                <div class="accordion-body">
+                    <h1>Appointment Details</h1>
+                    <p>Doctor Name: {{apt.doctor.user.first_name}} {{apt.doctor.user.last_name}}</p>
+                    <p>Appointment Date:{{apt.date}}</p>
+                    <p>Appointment Start Time: {{apt.starttime}}</p>
+                    <p>Appointment End Time: {{apt.etime}}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    {% endif %}
+    {% endblock %}
